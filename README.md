@@ -4,15 +4,19 @@ A production-grade, highly interactive dashboard built with Next.js 13 (App Rout
 
 ---
 
+
 ## 🚀 Features
 
-- Auth (signup/login/logout, JWT in localStorage)
-- Dashboard: metric cards, charts, tables
-- Tenant, Products, Customers pages
-- "Sync Now" action (optimistic UI)
-- Responsive, accessible, clean UI
-- Loading skeletons, polling, brush/zoom, date-range filters, tooltips, sorting
-- Navbar settings for `x-api-key` (memory only)
+- **Authentication**: Signup, login, logout, JWT in localStorage, tenant and API key support
+- **Dashboard**: Metric cards, order statistics, revenue trends, top customers, low inventory, top selling products, all with real-time polling and skeleton loading
+- **Products Page**: Low inventory, top selling products (pie chart), product stats, full inventory table with pagination
+- **Customers Page**: Top customers, order statistics, revenue trends, customer acquisition trends (bar chart), and paginated order cards with details modal
+- **Orders**: Paginated order cards, click for full order details and items in modal
+- **Sync Now**: Optimistic UI for data sync
+- **Responsive, accessible, clean UI**: TailwindCSS, keyboard navigation, color contrast
+- **Loading skeletons, polling, tooltips, sorting, date-range filters**
+- **Navbar**: User greeting, navigation, memory-only x-api-key settings
+- **Strict API contract adherence**: All fetchers match backend route/headers/response specs
 
 ---
 
@@ -78,20 +82,27 @@ curl -X POST <API_URL>/api/tenants/TENANT_ID/sync -H "Authorization: Bearer <tok
 
 ---
 
+
 ## 📂 Structure
 
-- `app/` — Next.js App Router pages
-- `components/` — UI, charts, tables, auth, layout
-- `lib/` — API, fetchers, auth helpers
-- `hooks/` — Custom React hooks
+- `app/` — Next.js App Router pages (dashboard, products, customers, login, signup, etc.)
+- `components/`
+	- `cards/` — MetricCard, LowInventoryCard, TopSellingProductsCard, ProductStatsCard, YourInventoryCard, OrderCard, OrderDetailsModal, YourOrdersCard
+	- `charts/` — RevenueTrendChart, TopCustomersChart, CustomerAcquisitionTrendsChart
+	- `tables/` — ProductsTable, CustomersTable
+	- `auth/`, `layout/`, `ui/` — Forms, Navbar, Toast, Spinner, etc.
+- `lib/` — API, fetchers (all backend endpoints), auth helpers
+- `hooks/` — Custom React hooks (auth, tenant, etc.)
 
 ---
 
+
 ## 📝 Notes
 
-- JWT is stored in `localStorage` as `auth_token` (easy to switch to HttpOnly cookies later)
+- JWT is stored in `localStorage` as `auth_token`, tenantId as `tenant_id`, API key as `api_key`, and user name as `name`
 - API key in Navbar is memory-only (not persisted)
-- For production, review security and error handling
+- All API calls use correct headers and match backend contracts
+- For production, review security, error handling, and environment variables
 
 ---
 

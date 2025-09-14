@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Xeno Dashboard (Next.js 13)
 
-## Getting Started
+A production-grade, highly interactive dashboard built with Next.js 13 (App Router, JavaScript), TailwindCSS, React Query, Axios, and Recharts. Connects to a Node/Express backend via `NEXT_PUBLIC_API_URL`.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- Auth (signup/login/logout, JWT in localStorage)
+- Dashboard: metric cards, charts, tables
+- Tenant, Products, Customers pages
+- "Sync Now" action (optimistic UI)
+- Responsive, accessible, clean UI
+- Loading skeletons, polling, brush/zoom, date-range filters, tooltips, sorting
+- Navbar settings for `x-api-key` (memory only)
+
+---
+
+## 🛠️ Setup
+
+1. **Clone & Install**
+	```sh
+	git clone <repo-url>
+	cd xeno_frontend
+	npm install
+	```
+2. **Configure Environment**
+	- Create `.env.local`:
+	  ```env
+	  NEXT_PUBLIC_API_URL=http://localhost:3001
+	  ```
+3. **Run**
+	```sh
+	npm run dev
+	```
+
+---
+
+## 🔑 Environment Variables
+
+- `NEXT_PUBLIC_API_URL` — Base URL of your backend API
+
+---
+
+## 📡 Example Backend Endpoints
+
+Replace `<API_URL>` with your backend base URL.
+
+### Signup
+```sh
+curl -X POST <API_URL>/api/user/signup -H "Content-Type: application/json" -d '{"email":"test@example.com","password":"pass123"}'
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Login
+```sh
+curl -X POST <API_URL>/api/user/login -H "Content-Type: application/json" -d '{"email":"test@example.com","password":"pass123"}'
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Metrics Summary
+```sh
+curl <API_URL>/api/metrics/summary?tenantId=TENANT_ID -H "Authorization: Bearer <token>"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Orders by Date
+```sh
+curl <API_URL>/api/orders/by-date?tenantId=TENANT_ID&start=2023-01-01&end=2023-01-31 -H "Authorization: Bearer <token>"
+```
 
-## Learn More
+### Top Customers
+```sh
+curl <API_URL>/api/customers/top?tenantId=TENANT_ID -H "Authorization: Bearer <token>"
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Sync Now
+```sh
+curl -X POST <API_URL>/api/tenants/TENANT_ID/sync -H "Authorization: Bearer <token>"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📂 Structure
 
-## Deploy on Vercel
+- `app/` — Next.js App Router pages
+- `components/` — UI, charts, tables, auth, layout
+- `lib/` — API, fetchers, auth helpers
+- `hooks/` — Custom React hooks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 Notes
+
+- JWT is stored in `localStorage` as `auth_token` (easy to switch to HttpOnly cookies later)
+- API key in Navbar is memory-only (not persisted)
+- For production, review security and error handling
+
+---
+
+## 🖥️ Run
+
+```sh
+npm run dev
+```
+
+---
+
+## 📧 Contact
+
+For questions, open an issue or contact the maintainer.

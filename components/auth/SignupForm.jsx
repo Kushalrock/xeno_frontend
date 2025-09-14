@@ -25,7 +25,7 @@ export default function SignupForm() {
           id="name"
           type="text"
           required
-          className="input input-bordered w-full"
+          className="input input-bordered w-full text-black"
           value={name}
           onChange={e => setName(e.target.value)}
         />
@@ -36,7 +36,7 @@ export default function SignupForm() {
           id="tenantId"
           type="text"
           required
-          className="input input-bordered w-full"
+          className="input input-bordered w-full text-black"
           value={tenantId}
           onChange={e => setTenantId(e.target.value)}
         />
@@ -48,7 +48,7 @@ export default function SignupForm() {
           type="email"
           autoComplete="email"
           required
-          className="input input-bordered w-full"
+          className="input input-bordered w-full text-black"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -60,7 +60,7 @@ export default function SignupForm() {
           type="password"
           autoComplete="new-password"
           required
-          className="input input-bordered w-full"
+          className="input input-bordered w-full text-black"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
